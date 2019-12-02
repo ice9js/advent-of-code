@@ -22,7 +22,7 @@ The Fuel Counter-Upper needs to know the total fuel requirement. To find it, ind
 
 What is the sum of the fuel requirements for all of the modules on your spacecraft?
 
-[INPUT](INPUT.txt) | [SOLUTION](fuel-required.rb)
+[SOLUTION](Spaceship.elm)
 
 ### Part two
 
