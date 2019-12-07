@@ -90,7 +90,9 @@ input = [1,0,0,3,...]
     |> fromList
     |> set 1 12
     |> set 2 2
-    |> intComputer 0
+    |> (initComputer 0 [])
+    |> run
+    |> .state
     |> getInt 0)
 
 -- Solution for part two: 5936
