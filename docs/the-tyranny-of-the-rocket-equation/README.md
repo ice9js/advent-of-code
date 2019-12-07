@@ -37,7 +37,7 @@ What is the sum of the fuel requirements for all of the modules on your spacecra
 
 ## Solution
 
-[Implementation](../../Spaceship.elm)
+[Implementation](../../src/Spaceship.elm)
 
 ```elm
 import Spaceship exposing (fuelRequired, fuelRequiredRecursive, spaceshipFuel)

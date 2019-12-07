@@ -77,7 +77,7 @@ Find the input noun and verb that cause the program to produce the output 196907
 
 ### Solution
 
-[Implementation](../../IntComputer.elm)
+[Implementation](../../src/IntComputer.elm)
 
 ```elm
 import Array exposing (fromList, set)
@@ -96,8 +96,6 @@ input = [1,0,0,3,...]
 -- Solution for part two: 5936
 (input
     |> fromList
-    |> set 1 12
-    |> set 2 2
     |> findIntComputerInput 99 99 19690720
     |> (\(x, y) -> 100 * x + y))
 ```
