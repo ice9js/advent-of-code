@@ -13,6 +13,7 @@ type alias IntComputer =
     , state: Array Int
     , input: List Int
     , output: List Int
+    , terminated: Bool
     }
 
 initComputer: Int -> List Int -> Array Int -> IntComputer
@@ -21,6 +22,7 @@ initComputer position input state =
     , state = state
     , input = input
     , output = []
+    , terminated = False
     }
 
 readArg: Int -> Int -> Array Int -> Int
@@ -84,7 +86,7 @@ run computer =
             | position = computer.position + 4
             , state = (write 3 (if (read 1) == (read 2) then 1 else 0))
             }
-        (99, _) -> computer
+        (99, _) -> { computer | terminated = True }
         _ -> computer
 
 findIntComputerInput: Int -> Int -> Int -> Array Int -> (Int, Int)
