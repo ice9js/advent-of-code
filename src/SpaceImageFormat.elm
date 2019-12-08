@@ -1,6 +1,7 @@
 module SpaceImageFormat exposing (..)
 
-import List exposing (drop, foldl, isEmpty, length, map, sum, take)
+import Basics exposing (min)
+import List exposing (drop, foldl, isEmpty, length, map, map2, repeat, sum, take)
 
 type alias ImageData = List Int
 type alias Layer = List Int
@@ -25,3 +26,37 @@ leastDigits n a b =
 reduceLayers: (Layer -> Layer -> Layer) -> Int -> Int -> ImageData -> Layer
 reduceLayers reducer width height image =
     foldl reducer [] (getLayers (width * height) image)
+
+stackPixels: Int -> Int -> Int
+stackPixels over under =
+    case over of
+        2 -> under
+        _ -> over
+
+stackLayers: Int -> List Layer -> Layer
+stackLayers imageSize layers =
+    case layers of
+        layer::rest -> map2 stackPixels layer (stackLayers imageSize rest)
+        _ -> repeat imageSize 2
+
+renderPixel: Int -> String
+renderPixel p =
+    case p of
+        0 -> " "
+        _ -> String.fromInt p
+
+renderLines: Int -> Layer -> String
+renderLines width layer =
+    case layer of
+        [] -> ""
+        _ -> (String.concat (map renderPixel (take width layer)))
+            ++ "|"
+            ++ (renderLines width (drop width layer))
+
+renderImage: Int -> Int -> ImageData -> String
+renderImage width height image =
+    let imageSize = width * height
+    in
+    getLayers imageSize image
+        |> stackLayers imageSize
+        |> renderLines width

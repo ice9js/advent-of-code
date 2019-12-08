@@ -9,3 +9,4 @@ Advent of Code 2019 puzzle solutions implemented in Elm.
 - **Day 5:** [Sunny with a Chance of Asteroids](docs/sunny-with-a-chance-of-asteroids/)
 - **Day 6:** [Universal Orbit Map](docs/universal-orbit-map/)
 - **Day 7:** [Amplification Circuit](docs/amplification-circuit/)
+- **Day 8:** [Space Image Format](docs/space-image-format/)
