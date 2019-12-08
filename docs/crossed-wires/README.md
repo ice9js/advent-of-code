@@ -83,9 +83,7 @@ U98,R91,D20,R16,D67,R40,U7,R15,U6,R7` = 410 steps
 
 **What is the fewest combined steps the wires must take to reach an intersection?**
 
-### Solution
-
-[Implementation](../../src/Wires.elm)
+## Solution ([Implementation](../../src/Wires.elm))
 
 ```elm
 import Tuple exposing (first, second)
@@ -109,6 +107,8 @@ let
 in
 getClosestIntersection (pathLengths a b) a b
 ```
+
+### Input
 
 ```elm
 input =

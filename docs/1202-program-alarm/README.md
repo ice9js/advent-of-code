@@ -75,13 +75,11 @@ Once the program has halted, its output is available at address 0, also just lik
 
 Find the input noun and verb that cause the program to produce the output 19690720. What is 100 * noun + verb? (For example, if noun=12 and verb=2, the answer would be 1202.)
 
-### Solution
-
-[Implementation](../../src/IntComputer.elm)
+## Solution ([Implementation](../../src/IntComputer.elm))
 
 ```elm
 import Array exposing (fromList, set)
-import IntComputer exposing (intComputer, getInt, findIntComputerInput)
+import IntComputer exposing (initComputer, getInt, findIntComputerInput)
 
 input = [1,0,0,3,...]
 
@@ -90,7 +88,7 @@ input = [1,0,0,3,...]
     |> fromList
     |> set 1 12
     |> set 2 2
-    |> (initComputer 0 [])
+    |> initComputer 0 []
     |> run
     |> .state
     |> getInt 0)
