@@ -78,10 +78,10 @@ import Amplifier exposing (findMaxThrustSignal, amplifySeries, amplifyLoop)
 driver = [3,8,1001,...]
 
 -- Solution for part one: 46248
-findMaxThrustSignal amplifySeries driver 0 [0,1,2,3,4]
+findMaxThrustSignal driver 0 [0,1,2,3,4]
 
 -- Solution for part two: 54163586
-findMaxThrustSignal amplifyLoop driver 0 [5,6,7,8,9]
+findMaxThrustSignal driver 0 [5,6,7,8,9]
 ```
 
 ### Input
