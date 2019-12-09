@@ -41,6 +41,14 @@ Once your Intcode computer is fully functional, the BOOST program should report 
 
 ### Part Two
 
+**You now have a complete Intcode computer.**
+
+Finally, you can lock on to the Ceres distress signal! You just need to boost your sensors using the BOOST program.
+
+The program runs in sensor boost mode by providing the input instruction the value 2. Once run, it will boost the sensors automatically, but it might take a few seconds to complete the operation on slower hardware. In sensor boost mode, the program will output a single value: **the coordinates of the distress signal.**
+
+Run the BOOST program in sensor boost mode. **What are the coordinates of the distress signal?**
+
 ## Solution ([Implementation](../../src/IntComputer.elm))
 
 ```elm
@@ -50,6 +58,11 @@ input = [1102,34463338,34463338,63,1007,...]
 
 -- Solution for part one: 3380552333
 (initComputer [1] (fromList input)
+	|> run
+	|> .output)
+
+-- Solution for part two: 78831
+(initComputer [2] (fromList input)
 	|> run
 	|> .output)
 ```
