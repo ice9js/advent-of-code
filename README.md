@@ -10,3 +10,4 @@ Advent of Code 2019 puzzle solutions implemented in Elm.
 - **Day 6:** [Universal Orbit Map](docs/universal-orbit-map/)
 - **Day 7:** [Amplification Circuit](docs/amplification-circuit/)
 - **Day 8:** [Space Image Format](docs/space-image-format/)
+- **Day 9:** [Sensor Boost](docs/sensor-boost/)

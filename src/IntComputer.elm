@@ -1,20 +1,17 @@
 module IntComputer exposing (..)
 
-import Array exposing (Array, get, set)
-import List exposing (append)
+import Array exposing (Array, append, get, length, set, repeat)
 import Tuple exposing (first)
-
-getInt: Int -> Array Int -> Int
-getInt index array =
-    Maybe.withDefault 0 (get index array)
 
 type ComputerState
     = Running
+    | AwaitingInput
     | Terminated
     | NotSupported
 
 type alias IntComputer =
     { position: Int
+    , relativeBase: Int
     , memory: Array Int
     , input: List Int
     , output: List Int
@@ -24,11 +21,22 @@ type alias IntComputer =
 initComputer: List Int -> Array Int -> IntComputer
 initComputer input memory =
     { position = 0
+    , relativeBase = 0
     , memory = memory
     , input = input
     , output = []
     , state = Running
     }
+
+updateMemory: Int -> Int -> Array Int -> Array Int
+updateMemory position value memory =
+    case position < length memory of
+        True -> set position value memory
+        _ -> updateMemory position value (append memory (repeat (position - (length memory) + 1) 0))
+
+getInt: Int -> Array Int -> Int
+getInt index array =
+    Maybe.withDefault 0 (get index array)
 
 getParameterIndex: Int -> IntComputer -> Int
 getParameterIndex param computer =
@@ -41,6 +49,7 @@ getParameterIndex param computer =
     case paramMode of
         0 -> getInt (computer.position + param) computer.memory
         1 -> computer.position + param
+        2 -> computer.relativeBase + (getInt (computer.position + param) computer.memory)
         _ -> -1
 
 run: IntComputer -> IntComputer
@@ -53,7 +62,7 @@ run computer =
         read =
             (\i -> getInt (getParameterIndex i computer) computer.memory)
         write =
-            (\i v -> (set (getParameterIndex i computer) v) computer.memory)
+            (\i v -> updateMemory (getParameterIndex i computer) v computer.memory)
     in
     case (instruction, computer.input) of
         (1, _) -> run
@@ -72,10 +81,11 @@ run computer =
             , memory = (write 1 value)
             , input = rest
             }
+        (3, []) -> { computer | state = AwaitingInput }
         (4, _) -> run
             { computer
             | position = computer.position + 2
-            , output = append computer.output [(read 1)]
+            , output = computer.output ++ [(read 1)]
             }
         (5, _) -> run
             { computer
@@ -95,7 +105,12 @@ run computer =
             | position = computer.position + 4
             , memory = (write 3 (if (read 1) == (read 2) then 1 else 0))
             }
-        (99, _) -> { computer | state = Running }
+        (9, _) -> run
+            { computer
+            | position = computer.position + 2
+            , relativeBase = computer.relativeBase + (read 1)
+            }
+        (99, _) -> { computer | state = Terminated }
         _ -> { computer | state = NotSupported }
 
 findIntComputerInput: Int -> Int -> Int -> Array Int -> (Int, Int)
