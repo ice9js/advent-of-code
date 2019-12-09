@@ -101,12 +101,12 @@ import Array exposing (fromList)
 input = [3,225,1,...]
 
 -- Solution for part one: 14155342
-(initComputer 0 [1] (fromList input)
+(initComputer [1] (fromList input)
     |> run
     |> .output)
 
 -- Solution for part two: 8684145
-(initComputer 0 [5] (fromList input)
+(initComputer [5] (fromList input)
     |> run
     |> .output)
 ```

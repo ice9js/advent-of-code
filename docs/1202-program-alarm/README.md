@@ -88,7 +88,7 @@ input = [1,0,0,3,...]
     |> fromList
     |> set 1 12
     |> set 2 2
-    |> initComputer 0 []
+    |> initComputer []
     |> run
     |> .state
     |> getInt 0)
