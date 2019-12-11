@@ -1,11 +1,13 @@
 module HullPaintingRobot exposing (..)
 
 import Array
-import List exposing (head, length, map, tail)
+import List exposing (foldl, foldr, head, length, map, range, tail)
 import Set
-import Tuple exposing (mapSecond)
+import Tuple exposing (first, mapSecond, second)
 
 import IntComputer exposing (ComputerState(..), IntComputer, initComputer, run)
+
+intMax = 2147483647
 
 type Direction
     = Left
@@ -17,7 +19,6 @@ type alias Coord = (Int, Int)
 
 type alias Panel =
     { position: Coord
-    -- could be Color ?
     , color: Int
     }
 
@@ -30,10 +31,10 @@ type alias HullPaintingRobot =
 
 getCurrentColorFor: Coord -> List Panel -> Int
 getCurrentColorFor position paintedPanels =
-    case paintedPanels of
-        panel::rest -> if panel.position == position then panel.color else getCurrentColorFor position rest
-        -- panel not painted yet = black
-        [] -> 0
+    case (paintedPanels, position) of
+        (panel::rest, _) -> if panel.position == position then panel.color else getCurrentColorFor position rest
+        (_, (0, 0)) -> 1
+        _ -> 0
 
 initRobot: List Int -> Coord -> HullPaintingRobot
 initRobot driver origin =
@@ -103,3 +104,25 @@ getTotalPaintedPanels robot =
         |> map .position
         |> Set.fromList
         |> Set.size
+
+paint: HullPaintingRobot -> String
+paint robot =
+    let
+        panels =
+            .paintedPath (runRobot robot)
+        coordinates =
+            Set.fromList (map .position panels)
+        minX =
+            Set.foldl (first >> min) intMax coordinates
+        maxX =
+            Set.foldl (first >> max) 0 coordinates
+        minY =
+            Set.foldl (second >> min) intMax coordinates
+        maxY =
+            Set.foldl (second >> max) 0 coordinates
+        drawPoint =
+            (\x y -> if 0 == getCurrentColorFor (x, y) panels then " " else "X")
+        drawRow =
+            (\y -> foldl (\x row -> row ++ (drawPoint x y)) "" (range minX maxX))
+    in
+    foldr (\y out -> out ++ (drawRow y) ++ "\n" ) "" (range minY maxY)
