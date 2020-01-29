@@ -18,3 +18,13 @@ permutate numbers =
         [] -> []
         a::[] -> [[a]]
         _ -> concat (map (permutateFor numbers) numbers)
+
+-- is that even correct?
+combinations: List a -> List (a, a)
+combinations items =
+    case items of
+        item::rest ->
+            map (\other -> [(item, other), (other, item)]) rest
+                |> concat
+                |> append (combinations rest)
+        [] -> []

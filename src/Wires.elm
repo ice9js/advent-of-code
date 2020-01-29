@@ -43,6 +43,7 @@ manhattanDistance: Point -> Point -> Int
 manhattanDistance (ax, ay) (bx, by) =
     (abs (ax - bx)) + (abs (ay - by))
 
+-- try splitting path by point and then length
 pathDistance: Point -> Path -> Int
 pathDistance point path =
     let

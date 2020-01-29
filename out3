@@ -1,0 +1,23 @@
+||||||||||||||||||||||||||||||||||||
+u|                                  |
+u| XX X    XX XXX XXXX  X X   XXXXX |
+u| X  XXX  X  X X  XX  X  XXX X XXX |
+u| XX XX X   X X  X X  XXXX XXX   X |
+u|    X  XX  XX X XX XXX   XXXX XXX |
+u| X       XXXX XXXXX XX X   XXX X  |
+u| X XXXXX  X   X XX  X XXXX X      |
+u| XX   X   XX XXX XXX XXXXXXX XXXX |
+u|  X XXXX  XX  X  X  XX  X XX  X X |
+u| XXXX X XX XXXX       XXXXX X   X |
+u| X   X  X  X   XXXXX X X X X  XX  |
+u|  X X  X X XXX X XXXXX  XXXX XXX  |
+u| XXXX  XX  X   X  XX  XX XX XXXXX |
+u| XXX  XX XX  XX   XX XXX XXXXXXXX |
+u|                                  |
+u|               O                  |
+u|                                  |
+u|                                  |
+u|                 -                |
+u|                                  |
+
+moves = [0,0,0,0,0,0,0,0,-1,-1,-1,-1,-1,0]

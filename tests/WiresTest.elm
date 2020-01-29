@@ -26,4 +26,3 @@ wiresTests =
     , test "pathLengths should return for (2,3)"
         (\_ -> Expect.equal 8 (pathLengths examplePath (reverse examplePath) (0, 3)))
     ]
-

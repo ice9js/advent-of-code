@@ -27,6 +27,36 @@ reduceLayers: (Layer -> Layer -> Layer) -> Int -> Int -> ImageData -> Layer
 reduceLayers reducer width height image =
     foldl reducer [] (getLayers (width * height) image)
 
+paintPixel: Int -> Int -> String
+paintPixel over under =
+    case over of
+        2 -> String.fromInt under
+        0 -> " "
+        _ -> String.fromInt over
+
+paintImage: Int -> Int -> ImageData -> String
+
+
+paintLine width over under =
+    case (over, under) of
+        (a::x, b::y) -> map2 
+        _ -> repeat width 2
+
+paintLine: width layer =
+
+
+paintImage width height image =
+    let
+        imageSize =
+            width * height
+        layers =
+            getLayers imageSize image
+    in
+    case layers of
+        layer::rest -> map2 
+
+
+
 stackPixels: Int -> Int -> Int
 stackPixels over under =
     case over of
